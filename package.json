@@ -1,0 +1,18 @@
+{
+  "name": "getiptc",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "coffee app"
+  },
+  "engines": {
+	"node": "0.8.x",
+	"npm": "1.1.x"
+  },
+  "dependencies": {
+    "express": "3.x.x",
+    "ejs": "*",
+    "async": "*",
+    "request": "*",
+    "coffee-script": "*"
+  }
+}
