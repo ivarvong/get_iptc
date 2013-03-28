@@ -1,41 +1,58 @@
-<style>
-	body {
-		font-family: "Helvetica Neue";
-		font-size: 15px/1.5;
-		margin: 0;
-		padding: 20px;
+<html>
+<head>
+	<title>get_iptc</title>
+	<style>
+		body {
+			font-family: "Helvetica Neue";
+			font-size: 15px/1.5;
+			margin: 0;
+			padding: 20px;
+		}
+		input {
+			max-width: 100%;
+		}
+		.head {
+		max-width: 500px;
+		}
+	</style>
+	<script>
+	var rewrite_url = function() {
+		window.location = '/' + encodeURIComponent(document.getElementById('url').value)
 	}
-	input {
-		max-width: 100%;
-	}
-	.head {
-	max-width: 500px;
-	}
-</style>
-<script>
-var rewrite_url = function() {
-	window.location = '/' + encodeURIComponent(document.getElementById('url').value)
-}
-</script>
+	</script>
+</head>
+<body>
 
-<br>
+	<div class="head">
+		<p>EXIF and IPTC metadata are added to photographs when they're created, edited and filed. Sometimes people or software strip this metadata before the images are on the web, sometimes not.</p> 
+		<p>This uses ImageMagick's "identify" to read that metadata out.</p>
+		<p>Here's the <a href="https://github.com/ivarvong/get_iptc/blob/master/app.coffee">code</a> (Node.js) if you want to run it yourself.</p>
+	</div>
+	<br>
+	<input id="url" size="150" placeholder="Paste a URL to an image."></input><br>
 
-<div class="head">
-	<p>EXIF and IPTC metadata are added to photographs when they're created, edited and filed. Sometimes people or software strip this metadata before the images are on the web, sometimes not.</p> 
-	<p>This uses ImageMagick's "identify" to read that metadata out.</p>
-	<p>Here's the <a href="https://github.com/ivarvong/get_iptc/blob/master/app.coffee">code</a> (Node.js) if you want to run it yourself.</p>
-</div>
-<br>
-<input id="url" size="150" placeholder="Paste a URL to an image."></input><br>
+	<a href="#" id="button" onclick="rewrite_url()">Get IPTC for image</a><br>
+	<br>
+	<br>
+	<br>
+	<small>
+	Need a URL? Try this one:<br>
+	http://graphics8.nytimes.com/images/2013/03/25/us/20130325-MANURE-slide-I2LP/20130325-MANURE-slide-I2LP-hpMedium.jpg
+	</small>
+	<br>
+	<br>
+	by <a href="http://twitter.com/ivarvong">@ivarvong</a>
 
-<a href="#" id="button" onclick="rewrite_url()">Get IPTC for image</a><br>
-<br>
-<br>
-<br>
-<small>
-Need a URL? Try this one:<br>
-http://graphics8.nytimes.com/images/2013/03/25/us/20130325-MANURE-slide-I2LP/20130325-MANURE-slide-I2LP-hpMedium.jpg
-</small>
-<br>
-<br>
-by <a href="http://twitter.com/ivarvong">@ivarvong</a>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-39679872-1', 'columntype.com');
+	  ga('send', 'pageview');
+
+	</script>
+	
+</body>
+</html>
