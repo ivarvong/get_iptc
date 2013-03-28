@@ -10,16 +10,35 @@ app.configure ->
 	app.use app.router
 	app.use express.static(__dirname + '/public')
 
+get_iptc = (url, callback) ->
+	identify = spawn('identify', ['-verbose', '-'])
+	request.get(url).pipe(identify.stdin)
+
+	identify.stdout.on 'data', (data) ->
+		callback null, data.toString().split("\n").map (line) ->
+			line.trim()
+
+	identify.stdout.on 'error', (data) ->		
+		callback data, null
+
 app.get '/', (req, res) ->
 	res.render 'index.ejs'
 
 app.get '/:url', (req, res) ->	
-	identify = spawn('identify', ['-verbose', '-'])
-	request.get(req.params.url).pipe(identify.stdin)
+	get_iptc req.params.url, (err, data) ->
+		if err
+			res.send 500, err
+		else
+			res.json data
 
-	identify.stdout.on 'data', (data) ->
-		res.json data.toString().split("\n").map (line) ->
-			line.trim()
-
-	identify.stdout.on 'error', (data) ->		
-		res.send 500, data.toString()
+app.get '/caption/:url', (req, res) ->
+	get_iptc req.params.url, (err, data) ->
+		if err
+			res.send 500, err
+		else		
+			caption_array = data.filter (line) ->
+				line.indexOf("Caption[2,120]") >= 0
+			caption_parts = caption_array[0].split(":")
+			caption_parts.shift()
+			caption = caption_parts.join(":").trim()
+			res.send 200, caption
