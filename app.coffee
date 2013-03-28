@@ -38,7 +38,10 @@ app.get '/caption/:url', (req, res) ->
 		else		
 			caption_array = data.filter (line) ->
 				line.indexOf("Caption[2,120]") >= 0
-			caption_parts = caption_array[0].split(":")
-			caption_parts.shift()
-			caption = caption_parts.join(":").trim()
-			res.send 200, caption
+			if caption_array.length > 0
+				caption_parts = caption_array[0].split(":")
+				caption_parts.shift()
+				caption = caption_parts.join(":").trim()				
+				res.send 200, caption
+			else
+				res.send 200, "(no caption)"
