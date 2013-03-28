@@ -1,1 +1,14 @@
-<a href="/http%3A%2F%2Fvong.s3-website-us-west-2.amazonaws.com%2F130302bookbattle%2Fcr.bookbattle02.0303.JPG">example</a>
+<script>
+var rewrite_url = function() {
+	window.location = '/' + encodeURIComponent(document.getElementById('url').value)
+}
+</script>
+
+<br>
+<input id="url" size="150" placeholder="Paste a URL to an image."></input><br>
+
+<a href="#" id="button" onclick="rewrite_url()">Get IPTC for image</a><br>
+<br>
+<br>
+<a href="https://github.com/ivarvong/get_iptc">the code</a> &bull;
+<a href="http://twitter.com/ivarvong">@ivarvong</a>
